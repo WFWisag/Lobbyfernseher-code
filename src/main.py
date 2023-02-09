@@ -3,21 +3,28 @@
 import os
 import bs4
 
+import config
+
 os.chdir(os.getcwd())
 
-def getDir() -> list:
-    imgDir = os.listdir(r"src/img")
-    return imgDir
 
-def writeInHTML():
-    imgDir = getDir()
 
-    htmlfile = open("src/index.html", "r")
-    soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
+def writeInHTML(element):
+    with open("src/index.html", "r+") as htmlfile:
+        soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
+        strSoup = str(soup)
+    
+    imgTags = str(soup.img)
+    print(imgTags)
 
-    imgTag = soup.img.attrs["id"] = "test"
-    print(imgTag)
+    newhtmlfileRT = strSoup.replace(imgTags, f"<img class='folie' src='img/{imgDir[0]}' />")
 
+    with open("src/index.html", "w+") as newhtmlfile:
+        newhtmlfile.write(newhtmlfileRT)
+
+def main():
+    pass
     
 if __name__ == "__main__":
-    writeInHTML()
+    print()
+    #writeInHTML()
