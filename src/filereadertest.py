@@ -8,4 +8,6 @@ with open("src/index.html", "r+") as htmlfile:
         strSoup = str(soup)
         
         TimeControl = soup.find_all("meta")[1]
+
+        NewTimeControl = ()
         
