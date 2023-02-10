@@ -2,8 +2,9 @@
 
 import os
 import bs4
+from time import sleep
 
-import config
+from config import config
 
 os.chdir(os.getcwd())
 
@@ -17,14 +18,22 @@ def writeInHTML(element):
     imgTags = str(soup.img)
     print(imgTags)
 
-    newhtmlfileRT = strSoup.replace(imgTags, f"<img class='folie' src='img/{imgDir[0]}' />")
+    newhtmlfileRT = strSoup.replace(imgTags, f"<img class='folie' src='media/{element}' />")
 
     with open("src/index.html", "w+") as newhtmlfile:
         newhtmlfile.write(newhtmlfileRT)
 
 def main():
-    pass
+    tupel = config()
+    media = tupel[0]
+    Tts = tupel[1]
+
+    while True:
+        for element in media:
+            writeInHTML(element)
+            sleep(Tts)
+
+
     
 if __name__ == "__main__":
-    print()
-    #writeInHTML()
+    main()

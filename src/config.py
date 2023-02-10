@@ -3,17 +3,16 @@
 import os
 import bs4
 
-def getDir() -> tuple:
+def getDir() -> list:
     os.chdir(os.getcwd())
 
-    imgDir = os.listdir(r"src/img")
-    vidDir = os.listdir(r"src/vid")
-    return imgDir, vidDir
+    media = os.listdir(r"src/media")
+    return media
 
 def config() -> tuple:
     os.chdir(os.getcwd())
 
-    media = getDir()[0] + getDir()[1]
+    media = getDir()
 
     while True:
         try:
@@ -31,14 +30,16 @@ def config() -> tuple:
     with open("src/index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
-        print(strSoup)
+        
+        TimeControl = str(soup.find_all("meta")[1])
+        NewTimeControl = f"<meta content='{Tts}' http-equiv='refresh'>"
 
-        newTimeControl = strSoup.replace("<meta http-equiv='refresh' content='30'>", f"<meta http-equiv='refresh' content='{Tts}'")
-        print(newTimeControl)
+        newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
 
-        htmlfile.write(newTimeControl)
+    with open("src/index.html", "w+") as htmlfile:
+        htmlfile.write(newhtmlfile)
 
-    return media, Tts
+    return sorted(media), Tts
 
     
 
