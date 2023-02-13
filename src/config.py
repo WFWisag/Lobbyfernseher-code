@@ -6,7 +6,7 @@ import bs4
 def getDir() -> list:
     os.chdir(os.getcwd())
 
-    media = os.listdir(r"d:\Praktikum\Raspberry Pi für Lobbyfernseher\code\src/media")
+    media = os.listdir(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/media")
     return media
 
 def config() -> tuple:
@@ -27,7 +27,7 @@ def config() -> tuple:
 
         break
 
-    with open(r"d:\Praktikum\Raspberry Pi für Lobbyfernseher\code\src/index.html", "r+") as htmlfile:
+    with open(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
         
@@ -36,7 +36,7 @@ def config() -> tuple:
 
         newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
 
-    with open(r"d:\Praktikum\Raspberry Pi für Lobbyfernseher\code\src/index.html", "w+") as htmlfile:
+    with open(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "w+") as htmlfile:
         htmlfile.write(newhtmlfile)
 
     return sorted(media), Tts
