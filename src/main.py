@@ -11,7 +11,7 @@ os.chdir(os.getcwd())
 
 
 def writeInHTML(element):
-    with open("src/index.html", "r+") as htmlfile:
+    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
     
@@ -20,7 +20,7 @@ def writeInHTML(element):
 
     newhtmlfileRT = strSoup.replace(imgTags, f"<img class='folie' src='media/{element}' />")
 
-    with open("src/index.html", "w+") as newhtmlfile:
+    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "w+") as newhtmlfile:
         newhtmlfile.write(newhtmlfileRT)
 
 def main():
