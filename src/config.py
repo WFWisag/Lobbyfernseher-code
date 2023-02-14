@@ -9,25 +9,31 @@ def getDir() -> list:
     media = os.listdir(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/media")
     return media
 
-def config() -> tuple:
+def readconfigFile() -> float: # TODO: change the return type to tuple, when more config options are available
     os.chdir(os.getcwd())
 
-    media = getDir()
-
-    while True:
+    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/config.txt", "r+") as configfile:
+        config = configfile.readlines()
+        
         try:
-            Tts = int(input("Umschaltzeit (in s): "))
-
+            Tts = float(config[1].strip("Tts: "))
             if Tts <= 0:
                 raise ValueError
             else:
                 pass
         except ValueError:
-            continue
+            print("Umschaltzeit muss größer als 0 sein!")
+            exit(1)
 
-        break
+    return Tts
 
-    with open(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "r+") as htmlfile:
+def config() -> tuple:
+    os.chdir(os.getcwd())
+
+    media = getDir()
+    Tts = readconfigFile() # TODO: change the return type to tuple, when more config options are available
+
+    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
         
@@ -36,7 +42,7 @@ def config() -> tuple:
 
         newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
 
-    with open(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "w+") as htmlfile:
+    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "w+") as htmlfile:
         htmlfile.write(newhtmlfile)
 
     return sorted(media), Tts
