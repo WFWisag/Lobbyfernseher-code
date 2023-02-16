@@ -15,10 +15,13 @@ Fernseher zum Leben erwecken soll! Das hier ist die Dokumentation für den.
 - Blau: Module für Skripte
 - Gelb: andere externe Dateien / Ordner
 
-**Am Besten ist es, wenn man das Programm auf einem Raspberry Pi laufen lässt und autostart.py in den Autostart integriert.** Sonst muss man alles manuell starten usw.
+
 
 ## Hinweise zur Anwendung
 
 |Datei|Hinweis|
 |:---:|:-----:|
-|autostart.py| Zeile 14 ersetzen durch: ``os.system("chromium-browser --kiosk index.html")`` , wenn auf Raspi verwendet|
+|autostart.py|Zeile 8 ersetzen durch ``os.system("sudo python main.py")|
+|autostart.py|Zeile 14 ersetzen durch: ``os.system("chromium-browser --kiosk index.html")`` , wenn auf Raspi verwendet|
+|autostart.py|Wenn auf Raspi verwendet, möglichst in den autostart packen für bestes Erlebnis|
+
