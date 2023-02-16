@@ -4,19 +4,23 @@ import os
 import bs4
 
 def getDir() -> list:
-    os.chdir(os.getcwd())
 
-    media = os.listdir(r"d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/media")
+    media = os.listdir("media/")
     return media
 
-def readconfigFile() -> float: # TODO: change the return type to tuple, when more config options are available
+def readconfigFile() -> int: # TODO: change the return type to tuple, when more config options are available
     os.chdir(os.getcwd())
 
-    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/config.txt", "r+") as configfile:
+    with open("config.txt", "r+") as configfile:
         config = configfile.readlines()
         
         try:
-            Tts = float(config[1].strip("Tts: "))
+            Tts = int()
+            for line in config:
+                if line.startswith("Tts"):
+                    Tts = int(line.split("=")[1])
+                else:
+                    pass
             if Tts <= 0:
                 raise ValueError
             else:
@@ -33,7 +37,7 @@ def config() -> tuple:
     media = getDir()
     Tts = readconfigFile() # TODO: change the return type to tuple, when more config options are available
 
-    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "r+") as htmlfile:
+    with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
         
@@ -42,7 +46,7 @@ def config() -> tuple:
 
         newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
 
-    with open("d:/Praktikum/Raspberry Pi für Lobbyfernseher/code/src/index.html", "w+") as htmlfile:
+    with open("index.html", "w+") as htmlfile:
         htmlfile.write(newhtmlfile)
 
     return sorted(media), Tts
