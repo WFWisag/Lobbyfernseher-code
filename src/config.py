@@ -4,30 +4,40 @@ import os
 import bs4
 
 def getDir() -> list:
-    os.chdir(os.getcwd())
 
-    media = os.listdir(r"src/media")
+    media = os.listdir("media/")
     return media
 
-def config() -> tuple:
+def readconfigFile() -> int: # TODO: change the return type to tuple, when more config options are available
     os.chdir(os.getcwd())
 
-    media = getDir()
-
-    while True:
+    with open("config.txt", "r+") as configfile:
+        config = configfile.readlines()
+        
         try:
-            Tts = int(input("Umschaltzeit (in s): "))
-
+            Tts = int()
+            for line in config:
+                if line.startswith("Tts"):
+                    Tts = int(line.split("=")[1])
+                else:
+                    pass
             if Tts <= 0:
                 raise ValueError
             else:
                 pass
         except ValueError:
-            continue
+            print("Umschaltzeit muss größer als 0 sein!")
+            exit(1)
 
-        break
+    return Tts
 
-    with open("src/index.html", "r+") as htmlfile:
+def config() -> tuple:
+    os.chdir(os.getcwd())
+
+    media = getDir()
+    Tts = readconfigFile() # TODO: change the return type to tuple, when more config options are available
+
+    with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
         
@@ -36,7 +46,7 @@ def config() -> tuple:
 
         newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
 
-    with open("src/index.html", "w+") as htmlfile:
+    with open("index.html", "w+") as htmlfile:
         htmlfile.write(newhtmlfile)
 
     return sorted(media), Tts
