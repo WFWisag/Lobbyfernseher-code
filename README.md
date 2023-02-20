@@ -15,13 +15,11 @@ Fernseher zum Leben erwecken soll! Das hier ist die Dokumentation für den.
 - Blau: Module für Skripte
 - Gelb: andere externe Dateien / Ordner
 
-
-
 ## Hinweise zur Anwendung
 
 |Datei|Hinweis|
 |:---:|:-----:|
-|autostart.py|Zeile 8 ersetzen durch ``os.system("sudo python main.py")``|
+|autostart.py|Zeile 8 ersetzen durch ``os.system("sudo python main.py")``, wenn auf Raspi verwendet|
 |autostart.py|Zeile 14 ersetzen durch: ``os.system("chromium-browser --kiosk index.html")`` , wenn auf Raspi verwendet|
 |autostart.py|Wenn auf Raspi verwendet, möglichst in den autostart packen für bestes Erlebnis|
 
