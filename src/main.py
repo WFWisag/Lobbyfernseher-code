@@ -1,4 +1,4 @@
-# This is a script for testing python, whether it is able to read files
+# Main Script
 
 import os
 import bs4
@@ -19,6 +19,5 @@ def main():
             sleep(Tts)
 
 
-    
 if __name__ == "__main__":
     main()

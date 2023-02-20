@@ -3,17 +3,18 @@
 import os
 import bs4
 
-def getDir() -> list:
 
+def getDir() -> list:
     media = os.listdir("media/")
     return media
 
-def readconfigFile() -> int: # TODO: change the return type to tuple, when more config options are available
+
+def readconfigFile() -> int:  # TODO: change the return type to tuple, when more config options are available
     os.chdir(os.getcwd())
 
     with open("config.txt", "r+") as configfile:
         config = configfile.readlines()
-        
+
         try:
             Tts = int()
             for line in config:
@@ -31,16 +32,18 @@ def readconfigFile() -> int: # TODO: change the return type to tuple, when more 
 
     return Tts
 
+
 def config() -> tuple:
     os.chdir(os.getcwd())
 
     media = getDir()
-    Tts = readconfigFile() # TODO: change the return type to tuple, when more config options are available
+    # TODO: change the return type to tuple, when more config options are available
+    Tts = readconfigFile()
 
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
-        
+
         TimeControl = str(soup.find_all("meta")[1])
         NewTimeControl = f"<meta content='{Tts}' http-equiv='refresh'>"
 
@@ -50,8 +53,6 @@ def config() -> tuple:
         htmlfile.write(newhtmlfile)
 
     return sorted(media), Tts
-
-    
 
 
 if __name__ == "__main__":
