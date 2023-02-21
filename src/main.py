@@ -1,7 +1,6 @@
 # Main Script
 
 import os
-import bs4
 from time import sleep
 
 from config import config

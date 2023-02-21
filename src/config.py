@@ -2,6 +2,7 @@
 
 import os
 import bs4
+from writeInHTML import writeTimeControlInHTML as wtc
 
 
 def getDir() -> list:
@@ -40,17 +41,7 @@ def config() -> tuple:
     # TODO: change the return type to tuple, when more config options are available
     Tts = readconfigFile()
 
-    with open("index.html", "r+") as htmlfile:
-        soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
-        strSoup = str(soup)
-
-        TimeControl = str(soup.find_all("meta")[1])
-        NewTimeControl = f"<meta content='{Tts}' http-equiv='refresh'>"
-
-        newhtmlfile = strSoup.replace(TimeControl, NewTimeControl)
-
-    with open("index.html", "w+") as htmlfile:
-        htmlfile.write(newhtmlfile)
+    wtc(Tts)
 
     return sorted(media), Tts
 
