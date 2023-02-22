@@ -7,7 +7,8 @@ Fernseher zum Leben erwecken soll! Das hier ist die Dokumentation für den.
 
 ## Dokumentation
 
-![image](https://github.com/WFWisag/Lobbyfernseher-code/blob/master/Flowchart.drawio)
+![grafik](https://user-images.githubusercontent.com/85707089/220630879-28f3f874-99d8-4945-89bb-5c22af2b9a1b.png)
+
 
 (Grobe Übersicht, wie die einzelnen Skripte untereinander kommunizieren)
 
