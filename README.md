@@ -16,6 +16,12 @@ Fernseher zum Leben erwecken soll! Das hier ist die Dokumentation für den.
 - Blau: Module für Skripte
 - Gelb: andere externe Dateien / Ordner
 
+<hr>
+
+writeInHTML.py:
+![grafik](https://user-images.githubusercontent.com/85707089/220661198-d0c880a5-4bbf-454b-8bfc-e9ddf8167f35.png)
+
+
 ## Hinweise zur Anwendung
 
 |Datei|Hinweis|
