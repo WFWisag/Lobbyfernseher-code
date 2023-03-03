@@ -55,7 +55,7 @@ def writeIMGinHTML(element, replacedTag):
         strSoup = str(soup)
 
     newhtmlfileRT = strSoup.replace(
-        replacedTag, f"<img class='folie' src='media/{element}' />")
+        oldTags, f"<img class='folie' src='media/{element}' />")
 
     with open("index.html", "w+") as newhtmlfile:
         newhtmlfile.write(newhtmlfileRT)
@@ -71,7 +71,7 @@ def writeVIDinHTML(element, replacedTag):
     writeTimeControlInHTML(clipDuration)
 
     newhtmlfileRT = strSoup.replace(
-        replacedTag, f"<video class='folie' src='media/{element}' autoplay></video>")
+        oldTags, f"<video class='folie' src='media/{element}' autoplay></video>")
 
     with open("index.html", "w+") as newhtmlfile:
         newhtmlfile.write(newhtmlfileRT)
