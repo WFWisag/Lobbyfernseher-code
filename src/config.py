@@ -38,7 +38,6 @@ def config() -> tuple:
     os.chdir(os.getcwd())
 
     media = getDir()
-    # TODO: change the return type to tuple, when more config options are available
     Tts = readconfigFile()
 
     wtc(Tts)

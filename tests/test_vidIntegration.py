@@ -8,5 +8,9 @@ class TestWriteInHTML(unittest.TestCase):
         self.assertEqual(wih.getFileType("1.mp4"), "vid")
 
     def test_getVideoDuration(self):
-        os.chdir("tests")
+        #os.chdir("tests")
         self.assertEqual(wih.getVideoDuration("file_example_MP4_1920_18MG.mp4"), 31)
+
+    def test_getReplacedTag(self):
+        os.chdir("tests")
+        self.assertEqual(wih.getReplacedTag(), ('<img class="folie" src="media/folie1.png"/>', "img"))

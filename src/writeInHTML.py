@@ -1,6 +1,7 @@
 import bs4
 from moviepy.editor import VideoFileClip as vfc
 import math
+import os 
 
 
 def getFileType(element) -> str:
@@ -19,6 +20,7 @@ def getVideoDuration(element) -> int:
 
 
 def getReplacedTag() -> tuple:
+    os.chdir(os.getcwd())
     # it should either return the img or video tag
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
@@ -32,6 +34,7 @@ def getReplacedTag() -> tuple:
 
 
 def writeTimeControlInHTML(Tts):
+    os.chdir(os.getcwd())
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
@@ -46,6 +49,7 @@ def writeTimeControlInHTML(Tts):
 
 
 def writeIMGinHTML(element, replacedTag):
+    os.chdir(os.getcwd())
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
@@ -58,6 +62,7 @@ def writeIMGinHTML(element, replacedTag):
 
 
 def writeVIDinHTML(element, replacedTag):
+    os.chdir(os.getcwd())
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
