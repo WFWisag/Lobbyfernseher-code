@@ -3,7 +3,7 @@ from moviepy.editor import VideoFileClip as vfc
 import math
 
 
-def getFileType(element):
+def getFileType(element) -> str:
     if element.endswith(".png") or element.endswith(".jpg") or element.endswith(".jpeg") or element.endswith(".gif"):
         return "img"
     elif element.endswith(".mp4"):
@@ -14,19 +14,19 @@ def getFileType(element):
 
 def getVideoDuration(element) -> int:
     clip = vfc(element)
-    duration = clip.duration.ceil()
+    duration = math.ceil(clip.duration)
     return int(duration)
 
 
-def getReplacedTag():
+def getReplacedTag() -> tuple:
     # it should either return the img or video tag
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
 
         if soup.img == None:
-            return "vid"
+            return str(soup.video), "vid"
         elif soup.video == None:
-            return "img"
+            return str(soup.img), "img"
         else:
             return "error"
 
@@ -45,17 +45,10 @@ def writeTimeControlInHTML(Tts):
         htmlfile.write(newhtmlfile)
 
 
-def writeIMGinHTML(element):
+def writeIMGinHTML(element, replacedTag):
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
-
-    if getReplacedTag() == "vid":
-        oldTags = str(soup.video)
-    elif getReplacedTag() == "img":
-        oldTags = str(soup.img)
-    else:
-        exit(-1)
 
     newhtmlfileRT = strSoup.replace(
         oldTags, f"<img class='folie' src='media/{element}' />")
@@ -64,17 +57,10 @@ def writeIMGinHTML(element):
         newhtmlfile.write(newhtmlfileRT)
 
 
-def writeVIDinHTML(element):
+def writeVIDinHTML(element, replacedTag):
     with open("index.html", "r+") as htmlfile:
         soup = bs4.BeautifulSoup(htmlfile, 'html.parser')
         strSoup = str(soup)
-
-    if getReplacedTag() == "vid":
-        oldTags = str(soup.video)
-    elif getReplacedTag() == "img":
-        oldTags = str(soup.img)
-    else:
-        exit(-1)
 
     clipDuration = getVideoDuration(element)
     writeTimeControlInHTML(clipDuration)
@@ -87,7 +73,10 @@ def writeVIDinHTML(element):
 
 
 def writeInHTML(element):
-    if getFileType(element) == "img":
-        writeIMGinHTML(element)
-    elif getFileType(element) == "vid":
-        writeVIDinHTML(element)
+    rT = getReplacedTag()[0]
+    rTT = getReplacedTag()[1]
+
+    if rTT == "img":
+        writeIMGinHTML(element, rT)
+    elif rTT == "vid":
+        writeVIDinHTML(element, rT)
