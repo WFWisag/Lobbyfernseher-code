@@ -1,9 +1,9 @@
 # Config-Script for config the diashow
 
 import os
-import bs4
-from writeInHTML import writeTimeControlInHTML as wtc
+from src.writeInHTML import writeTimeControlInHTML as wtc
 
+os.chdir(os.getcwd())
 
 def getDir() -> list:
     media = os.listdir("media/")
