@@ -1,8 +1,3 @@
-__pycache__
-
-.vscode
-
-first_run
-dist
-build
-autostart.exe
+plan_diagram.drawio
+.$plan_diagram.drawio.bkp
+.$plan_diagram.drawio.dtmp
