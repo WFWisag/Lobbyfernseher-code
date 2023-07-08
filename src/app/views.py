@@ -21,12 +21,12 @@ def login():
 
 @views.route("/admin/panel")
 def panel():
-    pass
+    return render_template("panel.html")
 
 
 @views.route("/admin/panel/config")
 def config():
-    pass
+    return render_template("config.html")
 
 
 @views.route("/slider")
