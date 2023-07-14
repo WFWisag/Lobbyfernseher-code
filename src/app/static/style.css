@@ -1,1 +1,49 @@
-   
+h1 {
+  color: rgb(18, 161, 18);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+  padding: 20px;
+}
+
+div.login {
+  padding: 10px;
+}
+
+label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 150%;
+}
+
+input {
+  font-size: 150%;
+}
+
+input[type="submit"] {
+  background-color: rgb(18, 161, 18);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(71, 71, 71);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 150%;
+}
+
+a:hover {
+  color: rgb(18, 161, 18);
+}
+
+ul {
+  list-style: none;
+  border: 3px solid #f1f1f1;
+}
+
+li {
+  padding: 10px;
+}
