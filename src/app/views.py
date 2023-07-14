@@ -1,22 +1,11 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for
 
 views = Blueprint("views", __name__)
 
 
 @views.route("/")
 def home():
-    return redirect("/admin/login")
-
-
-# TODO: when logged in, redirect to /admin/panel
-
-
-@views.route("/admin/login", methods=["GET", "POST"])
-def login():
-    return render_template("login.html")
-
-
-# TODO: add login functionality
+    return redirect(url_for("auth.login"))
 
 
 @views.route("/admin/panel")
