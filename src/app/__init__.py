@@ -12,6 +12,7 @@ with open("src/app/SECRETKEY.txt") as secretkey:
 def create_app():
     app = Flask("app")
     app.config["SECRET_KEY"] = sk
+    app.config["UPLOAD_FOLDER"] = "src/app/uploads"
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")

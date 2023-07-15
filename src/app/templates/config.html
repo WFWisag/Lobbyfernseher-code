@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Config {% endblock %}
+
+{% block content %}
+<header>
+    <h1>Config</h1>
+    <a class="logout" href="/logout">Logout</a>
+    <hr>
+    <a class="logout" href="/admin/panel">Back to Panel</a>
+</header>
+
+<div class="config-duration">
+    <h2>Duration</h2>
+    <form method="post">
+        <input type="number" name="duration" value="{{ duration }}">
+        <input type="submit" value="Save" name="submit">
+    </form>
+</div>
+
+<hr>
+
+<div class="view-media">
+    <h2>Media</h2>
+    <ul>
+        {% for file in files %}
+        <li>
+            {{ file }} <a class='items' href='/admin/sliderconfig/delete/{{ file }}'>Delete</a> 
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<hr>
+
+<div class="upload">
+    <h2>Upload</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload" name="submit">
+    </form>
+</div>
+
+
+{% endblock %}
