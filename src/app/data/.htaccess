@@ -1,1 +1,3 @@
-Deny from all
+<Files "users.json">
+    Deny from all
+</Files>
