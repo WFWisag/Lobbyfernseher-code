@@ -1,7 +1,13 @@
 {
     "media": [
-        "1125418.jpg",
-        "1230061.jpg"
+        {
+            "type": "image",
+            "filename": "1125418.jpg"
+        },
+        {
+            "type": "image",
+            "filename": "1125452.jpg"
+        }
     ],
-    "duration": "12"
+    "duration": "5000"
 }

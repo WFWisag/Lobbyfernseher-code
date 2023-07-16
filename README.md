@@ -37,7 +37,8 @@ os.urandom(12)
 }
 ```
 
-5. Run the `main.py` file in the `/src/`-directory with Python. The server will start on port 5000. So you can access the website with `localhost:5000`. If you want to change the port, you can do this in the `main.py` file, by changing the value of `port` in the `app.run()` function.
+5. Create a folder called `src/app/uploads/`.
+6. Run the `main.py` file in the `/src/`-directory with Python. The server will start on port 5000. So you can access the website with `localhost:5000`. If you want to change the port, you can do this in the `main.py` file, by changing the value of `port` in the `app.run()` function.
 
 Additional:
 If you want to automatically open the website in fullscreen mode on startup, you can add the following line to the `main.py` file, **if used on a Raspberry Pi**:
