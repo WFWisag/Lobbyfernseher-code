@@ -1,4 +1,12 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    session,
+    send_from_directory,
+)
 from functools import wraps
 import os
 import json
@@ -92,3 +100,17 @@ def delete(filename):
 @login_required
 def slider():
     return render_template("slider.html")
+
+
+@views.route("/data/slider.json")
+@login_required
+def sliderdata():
+    with open(jsonfile, "r") as f:
+        data = json.load(f)
+    return data
+
+
+@views.route("/uploads/<filename>")
+@login_required
+def uploaded_file(filename):
+    return send_from_directory("uploads", filename)
