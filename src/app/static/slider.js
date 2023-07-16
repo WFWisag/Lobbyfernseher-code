@@ -2,18 +2,26 @@ const sliderContainer = document.getElementById("slider");
 let currentIndex = 0;
 let sliderData = null;
 
-// Fetch slider data from slider.json
-fetch("../data/slider.json")
-  .then((response) => response.json())
-  .then((data) => {
-    sliderData = data;
+async function fetchSliderData() {
+  try {
+    const response = await fetch("../data/slider.json");
+    sliderData = await response.json();
     generateSlides();
     startSlider();
-  })
-  .catch((error) => console.error(error));
+  } catch (error) {
+    console.error("Fehler beim Abrufen der Slider-Daten:", error);
+  }
+}
 
 function generateSlides() {
   const { duration, media } = sliderData;
+
+  if (!Array.isArray(media) || media.length < 1) {
+    console.error("Kein Medium gefunden.");
+    return;
+  }
+
+  sliderContainer.innerHTML = "";
 
   media.forEach((item) => {
     const slide = document.createElement("div");
@@ -27,13 +35,16 @@ function generateSlides() {
       const video = document.createElement("video");
       video.src = `../uploads/${item.filename}`;
       video.controls = true;
+      video.addEventListener("loadedmetadata", function () {
+        this.currentTime = 0;
+        this.play();
+      });
       slide.appendChild(video);
     }
 
     sliderContainer.appendChild(slide);
   });
 
-  // Set the duration for all slides
   const slides = document.querySelectorAll(".slider-item");
   slides.forEach((slide) => slide.setAttribute("data-duration", duration));
 }
@@ -42,7 +53,13 @@ function startSlider() {
   const slides = document.querySelectorAll(".slider-item");
   const duration = parseInt(slides[currentIndex].getAttribute("data-duration"));
 
-  slides[currentIndex].style.transform = "translateX(0)";
+  slides.forEach((slide, index) => {
+    if (index === currentIndex) {
+      slide.style.transform = "translateX(0)";
+    } else {
+      slide.style.transform = "translateX(-100%)";
+    }
+  });
 
   setTimeout(() => {
     slides[currentIndex].style.transform = "translateX(-100%)";
@@ -54,3 +71,5 @@ function startSlider() {
     startSlider();
   }, duration);
 }
+
+fetchSliderData();
